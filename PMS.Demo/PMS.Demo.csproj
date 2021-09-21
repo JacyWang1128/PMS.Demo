@@ -11,6 +11,8 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,9 +52,11 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PMS.Demo.Utils, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\PMS.Demo.Utils\bin\x64\Debug\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -93,6 +97,10 @@
     <ProjectReference Include="..\PMS.Demo.Runtime\PMS.Demo.Runtime.csproj">
       <Project>{cc58d52c-022e-4f18-90a8-0ad907ccc55b}</Project>
       <Name>PMS.Demo.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PMS.Demo.Utils\PMS.Demo.Utils.csproj">
+      <Project>{dde1d214-463b-4dda-8e44-e5ef415242e0}</Project>
+      <Name>PMS.Demo.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

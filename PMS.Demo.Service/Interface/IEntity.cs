@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -11,10 +12,10 @@ namespace PMS.Demo.Service.Interface
 
         int Update(T t);
 
-        int Delete(T t);
+        int Delete(string id);
 
         T Query(string id);
 
-        List<T> QueryList();
+        DataTable QueryList();
     }
 }
