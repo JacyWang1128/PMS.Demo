@@ -65,7 +65,7 @@ namespace PMS.Demo.Client
             {
                 btnSubmit.Text = "更新";
                 tbName.Text = person.name;
-                tbName.Enabled = false;
+                //tbName.Enabled = false;
                 comboBox1.Text = person.gender;
                 numericUpDown1.Value = (decimal)person.age;
                 DateTime d = DateTime.Now;
@@ -111,14 +111,19 @@ namespace PMS.Demo.Client
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(tbName.Text))
+            {
+                MessageBox.Show("姓名不能为空！");
+                return;
+            }
             if (person == null)
                 person = new Person() { id = Common.GetGUID() };
             string path = string.Empty;
             if (pictureBox1.Image != null)
             {
-                path = Global.CacheFilePath + $"{person.id + person.name}.jpg";
+                path = Global.CacheFilePath + $"{person.id + DateTime.Now.ToString("yyyyMMddHHmmss")}.jpg";
                 if (!Directory.Exists(Path.GetDirectoryName(path)))
-                    Directory.CreateDirectory(path);
+                    Directory.CreateDirectory(Path.GetDirectoryName(path));
                 using(Bitmap bmp = new Bitmap(pictureBox1.Image))
                 {
                     bmp.Save(path, ImageFormat.Jpeg);
