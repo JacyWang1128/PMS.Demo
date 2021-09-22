@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -56,15 +57,23 @@ namespace PMS.Demo.Client
                 return;
             }
             List<string> lstPersonIds = new List<string>();
+            List<string> lstPersonPhotos = new List<string>();
             foreach (DataGridViewRow item in dgvPersonTable.SelectedRows)
             {
                 lstPersonIds.Add(item.Cells["id"].Value.ToString());
+                if (!string.IsNullOrWhiteSpace(item.Cells["photopath"].Value.ToString()))
+                    lstPersonPhotos.Add(item.Cells["photopath"].Value.ToString());
             }
             if (lstPersonIds.Count > 0)
             {
                 foreach (var item in lstPersonIds)
                 {
                     Service.Container.personService.Delete(item);
+                }
+                foreach (var item in lstPersonPhotos)
+                {
+                    if (File.Exists(item))
+                        File.Delete(item);
                 }
             }
             RefreshDataGrid();
@@ -95,7 +104,7 @@ namespace PMS.Demo.Client
 
         private void AfterMethod(object sender, FormClosedEventArgs e)
         {
-            addPerson = null; 
+            addPerson = null;
             RefreshDataGrid();
         }
 
